@@ -3,7 +3,7 @@ name: Update Google Sheet
 on:
   workflow_dispatch:  # 手動トリガー可能
   schedule:
-    - cron: '0 12 * * *'  # 毎日21時(JST) に実行
+    - cron: '0 21 * * *'  # 毎日21時(JST) に実行
 
 jobs:
   update:
