@@ -1,0 +1,27 @@
+name: Update Google Sheet
+
+on:
+  workflow_dispatch:  # 手動トリガー可能
+  schedule:
+    - cron: '0 12 * * *'  # 毎日21時(JST) に実行
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install gspread oauth2client
+
+      - name: Run script
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: python update_sheet.py
